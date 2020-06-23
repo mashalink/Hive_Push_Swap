@@ -6,20 +6,21 @@
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:00:22 by mlink             #+#    #+#             */
-/*   Updated: 2020/06/08 15:48:10 by mlink            ###   ########.fr       */
+/*   Updated: 2020/06/10 15:59:14 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push.h"
 
-void ft_error(char *str)
+void		ft_error(char *str)
 {
 	write(1, str, ft_strlen(str));
 	exit(1);
 }
 
-int		ft_atoi_(const char *str)
+int			ft_atoi_(const char *str)
 {
+	int		i;
 	long	negative;
 	long	x;
 
@@ -29,22 +30,23 @@ int		ft_atoi_(const char *str)
 		|| *str == '\v' || *str == '\t')
 		str++;
 	if (*str == '-')
-			negative = -1;
+		negative = -1;
 	if (*str == '-' || *str == '+')
 		str++;
-	while (*str >= '0' && *str <= '9')
+	i = 0;
+	while (*str >= '0' && *str <= '9' && i++ < 10)
 	{
 		x = (x * 10) + (*str - '0');
 		str++;
-		if (x * negative > 2147483647 || x * negative < -2147483648)
-			ft_error("Error\n");
 	}
+	if (x * negative > 2147483647 || x * negative < -2147483648)
+		ft_error("Error\n");
 	if (str != '\0')
 		ft_error("Error\n");
 	return ((int)x * negative);
 }
 
-static int ft_len_array(char **str)
+static int	ft_len_array(char **str)
 {
 	int i;
 
@@ -53,7 +55,7 @@ static int ft_len_array(char **str)
 	return (i);
 }
 
-void ft_memory_for_stack(t_all *all, int len)
+void		ft_memory_for_stack(t_all *all, int len)
 {
 	if (!(all = (t_all*)ft_memalloc(sizeof(t_all))))
 		ft_error("Malloc_Error\n");
@@ -66,7 +68,7 @@ void ft_memory_for_stack(t_all *all, int len)
 	all->size = len;
 }
 
-void ckeck_double(int n, int *a, int i)
+void		ckeck_double(int n, int *a, int i)
 {
 	int j;
 
@@ -79,28 +81,60 @@ void ckeck_double(int n, int *a, int i)
 	return (1);
 }
 
-void ft_get_stack(t_all *all, char **str, int i)
+void		ft_get_stack(t_all *all, char **str, int i)
 {
-	long n;
+	int n; 
+	int min;
+	int max;
 
-	while(i < all->size)
+	while (i < all->size)
 	{
 		n = ft_atoi(str[i]);
-		if (!check_double((int)n, all->a, i))
+		if (!check_double(n, all->a, i))
 			ft_error("Error\n");
 		all->a[i] = n;
 		i++;
 	}
+	i = 0;
+	min = all->a[0];
+	max = all->a[0];
+	while (++i < all->size)
+	{
+		if (min > all->a[i])
+			min = all->a[i];
+		if (max < all->a[i])
+			max = all->a[i];
+	}
+	all->max = max;
+	all->min = min;
+}
+void sort(t_all *all)
+{
+	int n;
+	int i;
+	int place;
+	int *resalt;
+
+	place = 1;
+	*resalt = resalt[all->size];
+	while (all->max / place > 0)
+		place *= 10;
+	while ()
 }
 
-int main(int argc, char ** argv)
+// void		solve(t_all *all)
+// {
+
+// }
+
+int			main(int argc, char **argv)
 {
-	char **str;
-	int	len;
-	t_all *all;
+	char	**str;
+	int		len;
+	t_all	*all;
 
 	if (argc > 1)
-	{		
+	{
 		if (argc == 2)
 		{
 			str = ft_strsplit(argv[1], ' ');
@@ -110,6 +144,8 @@ int main(int argc, char ** argv)
 			len = argc - 1;
 		ft_memory_for_stack(&all, len);
 		str ? ft_get_stack(all, str, 0) : ft_get_stack(all, argv, 1);
+		ft_sort(all);
+		//ft_solve(all);
 	}
 	return (0);
 }

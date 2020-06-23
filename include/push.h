@@ -6,7 +6,7 @@
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:08:40 by mlink             #+#    #+#             */
-/*   Updated: 2020/06/08 15:11:02 by mlink            ###   ########.fr       */
+/*   Updated: 2020/06/10 15:11:40 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ typedef struct	s_all
 	int		*b;
 	int		*check;
 	int		size;
+	int		max;
+	int		min;
 }				t_all;
 
 

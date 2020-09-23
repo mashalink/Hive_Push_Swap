@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   help.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/08 14:08:40 by mlink             #+#    #+#             */
-/*   Updated: 2020/08/05 13:53:55 by mlink            ###   ########.fr       */
+/*   Created: 2020/09/22 14:00:55 by mlink             #+#    #+#             */
+/*   Updated: 2020/09/22 14:41:47 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "../includes/push_swap.h"
 
-typedef struct	s_all
+void	ft_min_first(t_all *all)
 {
-	int		*a;
-	int		*b;
-	int		*checker;
-	int		size;
-	int		a_stack_size;
-	int		b_stack_size:
-	int		max;
-	int		min;
-}				t_all;
+	int i;
 
-
-int main(int argc, char ** argv);
-
-#endif
+	i = 0;
+	while (all->a[i] != all->min)
+		i++;
+	if (i < all->size / 2)
+		while (all->a[0] != all->min)
+			ft_step_ra(all);
+	else
+		while (all->a[0] != all->min)
+			ft_step_rra(all);
+}

@@ -1,43 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   steps_s.c                                          :+:      :+:    :+:   */
+/*   steps_r.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/05 17:03:01 by mlink             #+#    #+#             */
-/*   Updated: 2020/08/14 13:52:08 by mlink            ###   ########.fr       */
+/*   Created: 2020/08/07 16:52:53 by mlink             #+#    #+#             */
+/*   Updated: 2020/09/22 15:06:30 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
-int		step_sa(t_all *all)
+
+int		step_ra(t_all *all)
 {
+	int i;
+	int j;
 	int tmp;
 
-	if (all->a_stack_size < 2)
+	if (all->a_size < 2)
 		return (1);
-	tmp = all->a_stack[0];
-	all->a_stack[0] = all->a_stack[1];
-	all->a_stack[1] = tmp;
-	return(1);
+	i = 0;
+	j = 0;
+	tmp = all->a[0];
+	while (i < all->a_size)
+		all->a[i++] = all->a[++j];
+	all->a[--i] = tmp;
+	return (1);
 }
 
-int		step_sb(t_all *all)
+int		step_rb(t_all *all)
 {
+	int i;
+	int j;
 	int tmp;
 
-	if (all->b_stack_size < 2)
+	if (all->b_size < 2)
 		return (1);
-	tmp = all->b_stack[0];
-	all->b_stack[0] = all->b_stack[1];
-	all->b_stack[1] = tmp;
-	return(1);
+	i = 0;
+	j = 0;
+	tmp = all->b[0];
+	while (i < all->b_size)
+		all->b[i++] = all->b[++j];
+	all->b[--i] = tmp;
+	return (1);
 }
 
-int		step_ss(t_all *all)
+int		step_rr(t_all *all)
 {
-	step_sa(all);
-	step_sb(all);
-	return(1);
+	step_ra(all);
+	step_rb(all);
+	return (1);
 }

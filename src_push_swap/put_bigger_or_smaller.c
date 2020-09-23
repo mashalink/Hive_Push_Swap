@@ -1,48 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   put_bigger_or_smaller.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/08 14:00:22 by mlink             #+#    #+#             */
-/*   Updated: 2020/09/15 14:29:10 by mlink            ###   ########.fr       */
+/*   Created: 2020/08/24 16:49:05 by mlink             #+#    #+#             */
+/*   Updated: 2020/09/22 14:38:45 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int	ft_len_array(char **str)
+int		ft_put_smaller(t_all *all, int mean)
+{
+	int i;
+
+	i = -1;
+	while (++i < all->a_size)
+	{
+		if (all->a[i] <= mean)
+		{
+			while (i > 0)
+			{
+				ft_step_ra(all);
+				i--;
+			}
+			return (1);
+		}
+	}
+	return (0);
+}
+
+int		ft_put_bigger(t_all *all, int mean)
 {
 	int i;
 
 	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int			main(int argc, char **argv)
-{
-	char	**str;
-	int		len;
-	t_all	*all;
-
-	if (argc > 1)
+	while (i < all->a_size)
 	{
-		str = NULL;
-		all = NULL;
-		if (argc == 2)
+		if (all->a[i] > mean && all->a[i] != all->max)
 		{
-			str = ft_strsplit(argv[1], ' ');
-			len = ft_len_array(str);
+			while (i > 0)
+			{
+				if (i-- > 0)
+					ft_step_ra(all);
+			}
+			return (1);
 		}
-		else
-			len = argc - 1;
-		all = ft_memory_for_stack(all, len);
-		str ? ft_get_stack_str(all, str, 0) : ft_get_stack_argv(all, argv, 1);
-		ft_sort(all);
-		ft_solve(all);
+		i++;
 	}
 	return (0);
 }

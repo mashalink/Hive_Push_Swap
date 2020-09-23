@@ -5,51 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/07 16:52:53 by mlink             #+#    #+#             */
-/*   Updated: 2020/08/14 13:51:52 by mlink            ###   ########.fr       */
+/*   Created: 2020/08/24 16:19:34 by mlink             #+#    #+#             */
+/*   Updated: 2020/09/15 14:35:23 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/push_swap.h"
 
-#include "../includes/checker.h"
-
-int		step_ra(t_all *all)
+int		ft_step_ra(t_all *all)
 {
 	int i;
 	int j;
 	int tmp;
 
-	if (all->a_stack_size < 2)
+	if (all->a_size < 2)
 		return (1);
 	i = 0;
 	j = 0;
-	tmp = all->a_stack[0];
-	while (i < all->a_stack_size)
-		all->a_stack[i++] = all->a_stack[++j];
-	all->a_stack[--i] = tmp;
+	tmp = all->a[0];
+	while (i < all->a_size)
+		all->a[i++] = all->a[++j];
+	all->a[--i] = tmp;
+	all->flag_print != 1 ? ft_steps(5) : 0;
 	return (1);
 }
 
-int		step_rb(t_all *all)
+int		ft_step_rb(t_all *all)
 {
 	int i;
 	int j;
 	int tmp;
 
-	if (all->b_stack_size < 2)
+	if (all->b_size < 2)
 		return (1);
 	i = 0;
 	j = 0;
-	tmp = all->b_stack[0];
-	while (i < all->b_stack_size)
-		all->b_stack[i++] = all->b_stack[++j];
-	all->b_stack[--i] = tmp;
+	tmp = all->b[0];
+	while (i < all->b_size)
+		all->b[i++] = all->b[++j];
+	all->b[--i] = tmp;
+	all->flag_print != 1 ? ft_steps(6) : 0;
 	return (1);
 }
 
-int		step_rr(t_all *all)
+int		ft_step_rr(t_all *all)
 {
-	step_ra(all);
-	step_rb(all);
+	all->flag_print = 1;
+	ft_step_ra(all);
+	ft_step_rb(all);
+	ft_steps(7);
+	all->flag_print = 0;
 	return (1);
 }

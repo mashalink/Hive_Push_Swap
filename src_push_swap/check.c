@@ -6,7 +6,7 @@
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 16:16:54 by mlink             #+#    #+#             */
-/*   Updated: 2020/09/22 14:59:49 by mlink            ###   ########.fr       */
+/*   Updated: 2020/09/30 15:40:10 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_check_three(t_all *all)
 	if ((all->a[0] > all->a[1] && all->a[1] > all->a[2]) || \
 	(all->a[0] > all->a[1] && all->a[2] > all->a[0]))
 	{
-		if (all->b[0] > all->b[1])
+		if (all->b[0] < all->b[1])
 			ft_step_ss(all);
 		else
 			ft_step_sa(all);
@@ -39,7 +39,7 @@ void	ft_check_three(t_all *all)
 	}
 	else if (all->a[0] > all->a[2] && all->a[2] > all->a[1])
 	{
-		if (all->b[0] > all->b[all->b_size - 1])
+		if (all->b[0] < all->b[all->b_size - 1])
 			ft_step_rr(all);
 		else
 			ft_step_ra(all);
@@ -47,7 +47,7 @@ void	ft_check_three(t_all *all)
 	else if ((all->a[0] < all->a[2] && all->a[1] > all->a[2]) || \
 	(all->a[0] < all->a[1] && all->a[0] > all->a[2]))
 	{
-		if (all->b[0] > all->b[all->b_size - 1])
+		if (all->b[0] < all->b[all->b_size - 1])
 			ft_step_rrr(all);
 		else
 			ft_step_rra(all);

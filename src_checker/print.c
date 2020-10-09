@@ -6,7 +6,7 @@
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 15:11:07 by mlink             #+#    #+#             */
-/*   Updated: 2020/09/22 15:13:32 by mlink            ###   ########.fr       */
+/*   Updated: 2020/09/30 15:43:08 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 
 void		ft_error(char *str)
 {
-	write(1, str, ft_strlen(str));
+	ft_putendl(str);
 	exit(1);
 }
 
-static int	ft_check(t_all *all)
+void		ft_error_vis(char *str, t_all *all)
+{
+	if (all->flag)
+		all->error_massage = str;
+	else
+	{
+		ft_putendl(str);
+		exit(1);
+	}
+}
+
+int			ft_check(t_all *all)
 {
 	int i;
 
@@ -35,7 +46,7 @@ static int	ft_check(t_all *all)
 void		ft_final_check(t_all *all)
 {
 	if (ft_check(all))
-		ft_putstr("OK\n");
+		ft_putendl("OK");
 	else
-		ft_putstr("KO\n");
+		ft_putendl("KO");
 }

@@ -6,7 +6,7 @@
 #    By: mlink <mlink@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/10 13:32:58 by mlink             #+#    #+#              #
-#    Updated: 2020/09/23 09:15:32 by mlink            ###   ########.fr        #
+#    Updated: 2020/09/25 14:11:37 by mlink            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME_CHECKER = checker
 NAME_PUSH_SWAP = push_swap
 
 SRC_CHECKER =	main.c steps_p.c steps_r.c steps_rr.c steps_s.c \
-				print.c stack.c
+				print.c stack.c draw.c draw_line.c key_draw.c
 SRC_PUSH_SWAP = main.c check.c print.c put_bigger_or_smaller.c \
 				solve.c sort.c stacks.c steps_p.c steps_r.c \
 				steps_rr.c steps_s.c find_next.c help.c \
@@ -36,6 +36,8 @@ LIBFT_HEADER = -I libft/includes
 
 LIBFT = libft/libft.a
 
+BONUS = -lmlx -framework OpenGL -framework AppKit
+
 RESET = \033[0m
 YELLOW = \033[0;33m
 GREEN = \033[0;32m
@@ -50,7 +52,7 @@ $(OBJ_CHECKER_DIR)/%.o: $(SRC_CHECKER_DIR)%.c
 $(NAME_CHECKER): $(SRCC)
 	@echo "	$(GREEN)<<$(RESET)$(YELLOW)$(NAME_CHECKER) is compiling...$(GREEN)>>$(RESET)"
 	@make -C libft
-	@gcc $(FLAGS) -o $@ $^ $(LIBFT_HEADER) $(HEADER) $(LIBFT)
+	@gcc $(FLAGS) -o $@ $^ $(LIBFT_HEADER) $(HEADER) $(LIBFT) $(BONUS)
 	@echo "	$(GREEN)<<$(RESET)$(YELLOW)$(NAME_CHECKER) is ready to use$(GREEN)>>$(RESET)"
 
 $(OBJ_PUSH_SWAP_DIR)/%.o: $(SRC_PUSH_SWAP_DIR)%.c

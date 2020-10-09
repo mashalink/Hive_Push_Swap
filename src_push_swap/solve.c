@@ -6,7 +6,7 @@
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 16:05:37 by mlink             #+#    #+#             */
-/*   Updated: 2020/09/22 14:34:20 by mlink            ###   ########.fr       */
+/*   Updated: 2020/09/30 16:08:53 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	ft_large(t_all *all)
 	int mean;
 
 	mean = all->checker[all->size / 2];
-	while (ft_put_smaller(all, mean))
+	while (ft_put_smaller_large(all, mean))
 		ft_step_pb(all);
 	while (all->b_size > 0)
 	{
@@ -84,7 +84,7 @@ static int	ft_large(t_all *all)
 			ft_get_next(all);
 		}
 	}
-	while (ft_put_bigger(all, mean))
+	while (ft_put_bigger_large(all, mean))
 		ft_step_pb(all);
 	while (all->b_size > 0)
 	{

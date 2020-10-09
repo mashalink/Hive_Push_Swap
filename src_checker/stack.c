@@ -6,27 +6,31 @@
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 15:07:59 by mlink             #+#    #+#             */
-/*   Updated: 2020/09/22 15:21:01 by mlink            ###   ########.fr       */
+/*   Updated: 2020/10/02 10:51:00 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-t_all		*ft_memory_for_stack(t_all *all, int len)
+t_all		*ft_memory_for_stack(t_all *all, int len, int flag)
 {
+	if (len == 0)
+		ft_error(ERR_ARGV);
 	if (!(all = (t_all*)ft_memalloc(sizeof(t_all))))
-		ft_error("Malloc_Error\n");
+		ft_error_vis(ERR_MALLOC	, all);
+	all->flag = flag;
 	if (!(all->a = (int*)ft_memalloc(sizeof(int) * len)))
-		ft_error("Malloc_Error\n");
+		ft_error_vis(ERR_MALLOC	, all);
 	if (!(all->b = (int*)ft_memalloc(sizeof(int) * len)))
-		ft_error("Malloc_Error\n");
+		ft_error_vis(ERR_MALLOC	, all);
 	all->size = len;
 	all->a_size = len;
 	all->b_size = 0;
+	all->error_massage = NULL;
 	return (all);
 }
 
-int			ft_atoi_ps(const char *str)
+int			ft_atoi_ps(const char *str, t_all *all)
 {
 	int		i;
 	long	negative;
@@ -47,9 +51,9 @@ int			ft_atoi_ps(const char *str)
 		str++;
 	}
 	if (i == 0)
-		ft_error("Error\n");
+		ft_error_vis(ERR_STRING, all);
 	if (x * negative > 2147483647 || x * negative < -2147483648)
-		ft_error("Error\n");
+		ft_error_vis(ERR_NUMBER, all);
 	return ((int)x * negative);
 }
 
@@ -75,9 +79,9 @@ void		ft_get_stack_str(t_all *all, char **str, int i)
 	j = 0;
 	while (i < all->size)
 	{
-		n = ft_atoi_ps(str[i++]);
+		n = ft_atoi_ps(str[i++], all);
 		if (!check_double(n, all, j))
-			ft_error("Error\n");
+			ft_error_vis(ERR_DOUBLE, all);
 		all->a[j++] = n;
 	}
 }
@@ -88,11 +92,11 @@ void		ft_get_stack_argv(t_all *all, char **str, int i)
 	int j;
 
 	j = 0;
-	while (i <= all->size)
+	while (i <= all->size + all->flag)
 	{
-		n = ft_atoi_ps(str[i++]);
+		n = ft_atoi_ps(str[i++], all);
 		if (!check_double(n, all, j))
-			ft_error("Error\n");
+			ft_error_vis(ERR_DOUBLE, all);
 		all->a[j++] = n;
 	}
 }

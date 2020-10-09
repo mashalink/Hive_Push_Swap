@@ -6,7 +6,7 @@
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 14:08:40 by mlink             #+#    #+#             */
-/*   Updated: 2020/09/22 15:27:14 by mlink            ###   ########.fr       */
+/*   Updated: 2020/10/05 11:09:39 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include "../libft/includes/libft.h"
 # include "../libft/includes/get_next_line.h"
+
+# define ERR_MALLOC				"Malloc_Error\n"
+# define ERR_DOUBLE				"Error: double numders\n"
+# define ERR_NUMBER				"Error: need to be (-2147483649;2147483648)\n"
+# define ERR_STRING				"Error: have not a number or empty value\n"
+# define ERR_ARGV				"Error: doesn't contain a list of integers\n"
 
 typedef struct	s_all
 {
@@ -51,7 +57,8 @@ int				ft_check(t_all *all);
 void			ft_check_three(t_all *all);
 
 int				ft_put_smaller(t_all *all, int mean);
-int				ft_put_bigger(t_all *all, int mean);
+int				ft_put_smaller_large(t_all *all, int mean);
+int				ft_put_bigger_large(t_all *all, int mean);
 
 int				ft_find_next(t_all *all);
 

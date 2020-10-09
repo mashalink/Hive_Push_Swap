@@ -6,7 +6,7 @@
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 14:50:09 by mlink             #+#    #+#             */
-/*   Updated: 2020/09/23 09:32:53 by mlink            ###   ########.fr       */
+/*   Updated: 2020/10/02 10:46:45 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_len_array(char **str)
 	return (i);
 }
 
-static int	ft_steps(char *line, t_all *all)
+int			ft_steps(char *line, t_all *all)
 {
 	int i;
 
@@ -39,35 +39,65 @@ static int	ft_steps(char *line, t_all *all)
 	ft_strcmp(line, "rrb") == 0 ? i = step_rrb(all) : 0;
 	ft_strcmp(line, "rrr") == 0 ? i = step_rrr(all) : 0;
 	if (i != 1)
-		ft_error("Error\n");
+		ft_error_vis(ERR_COMMAND, all);
 	return (0);
 }
 
-int			main(int argc, char **argv)
+static void	ft_take_and_check(t_all *all)
 {
-	char	**str;
 	char	*line;
-	t_all	*all;
-	int		len;
 
-	if (argc > 1)
+	if (all->flag)
+		ft_visual_sort(all);
+	else
 	{
-		str = NULL;
-		all = NULL;
-		if (argc == 2)
-		{
-			str = ft_strsplit(argv[1], ' ');
-			len = ft_len_array(str);
-		}
-		argc != 2 ? len = argc - 1 : 0;
-		all = ft_memory_for_stack(all, len);
-		str ? ft_get_stack_str(all, str, 0) : ft_get_stack_argv(all, argv, 1);
 		while (get_next_line(0, &line) > 0)
 		{
 			ft_steps(line, all);
 			free(line);
 		}
 		ft_final_check(all);
+	}
+}
+
+static int	ft_chech_flag(char **argv)
+{
+	if (!ft_strcmp(argv[1], "-v"))
+		return (1);
+	else if (!ft_strcmp(argv[1], "-c"))
+		return (1);
+	else if (!ft_strcmp(argv[1], "-h"))
+		ft_error(ERR_HELP);
+	else if (argv[1][0] == '-')
+		ft_error(ERR_VISUALISATION);
+	return (0);
+}
+
+int			main(int argc, char **argv)
+{
+	char	**str;
+	t_all	*all;
+	int		len;
+	int		flag;
+
+	if (argc > 1)
+	{
+		str = NULL;
+		all = NULL;
+		flag = ft_chech_flag(argv);
+		if (argc == 2 || (argc == 3 && flag))
+		{
+			str = ft_strsplit((flag ? argv[2] : argv[1]), ' ');
+			len = ft_len_array(str);
+		}
+		else
+			len = argc - (flag ? 2 : 1);
+		all = ft_memory_for_stack(all, len, flag);
+		if (str)
+			ft_get_stack_str(all, str, 0);
+		else
+			ft_get_stack_argv(all, argv, (flag ? 2 : 1));
+		ft_take_and_check(all);
 	}
 	return (0);
 }

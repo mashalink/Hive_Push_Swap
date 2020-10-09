@@ -6,7 +6,7 @@
 /*   By: mlink <mlink@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 16:11:53 by mlink             #+#    #+#             */
-/*   Updated: 2020/09/22 14:39:20 by mlink            ###   ########.fr       */
+/*   Updated: 2020/10/02 11:11:50 by mlink            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static int	ft_atoi_ps(const char *str)
 		str++;
 	}
 	if (i == 0)
-		ft_error("Error\n");
+		ft_error(ERR_STRING);
 	if (x * negative > 2147483647 || x * negative < -2147483648)
-		ft_error("Error\n");
+		ft_error(ERR_NUMBER);
 	return ((int)x * negative);
 }
 
@@ -65,7 +65,7 @@ void		ft_get_stack_str(t_all *all, char **str, int i)
 	{
 		n = ft_atoi_ps(str[i++]);
 		if (!ft_check_double(n, all, j))
-			ft_error("Error\n");
+			ft_error(ERR_DOUBLE);
 		all->a[j++] = n;
 	}
 }
@@ -80,21 +80,23 @@ void		ft_get_stack_argv(t_all *all, char **str, int i)
 	{
 		n = ft_atoi_ps(str[i++]);
 		if (!ft_check_double(n, all, j))
-			ft_error("Error\n");
+			ft_error(ERR_DOUBLE);
 		all->a[j++] = n;
 	}
 }
 
 t_all		*ft_memory_for_stack(t_all *all, int len)
 {
+	if (len == 0)
+		ft_error(ERR_ARGV);
 	if (!(all = (t_all*)ft_memalloc(sizeof(t_all))))
-		ft_error("Malloc_Error\n");
+		ft_error(ERR_MALLOC);
 	if (!(all->a = (int*)ft_memalloc(sizeof(int) * len)))
-		ft_error("Malloc_Error\n");
+		ft_error(ERR_MALLOC);
 	if (!(all->b = (int*)ft_memalloc(sizeof(int) * len)))
-		ft_error("Malloc_Error\n");
+		ft_error(ERR_MALLOC);
 	if (!(all->checker = (int*)ft_memalloc(sizeof(int) * len)))
-		ft_error("Malloc_Error\n");
+		ft_error(ERR_MALLOC);
 	all->size = len;
 	all->a_size = len;
 	all->b_size = 0;

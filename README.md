@@ -2,11 +2,11 @@
 
 The Push_swap project is a very simple and highly effective algorithm project: data will need to be sorted You have at your disposal a set of int values, 2 stacks and a set of instructions to manipulate both stacks.
 
-Objectives
+# Objectives
 
 This project will make you sort data on a stack, with a limited set of instructions, using the lowest possible number of actions. To succeed you’ll have to manipulate various types of algorithms and choose the one (of many) most appropriate solution for an optimized data sorting.
 
-Allowed operations
+# Allowed operations
 
 * sa : swap a - swap the first 2 elements at the top of stack a. Do nothing if there is only one or no elements).
 * sb : swap b - swap the first 2 elements at the top of stack b. Do nothing if there is only one or no elements).
@@ -54,7 +54,7 @@ The stack is now sorted.
 500+ integers
 The algorithm for 500 integers or more is the same as "100 integers or less", except the amount of groups is increased to 11.
 
-How to use
+# How to use
 
 ./push_swap [args ...]
 
@@ -64,9 +64,9 @@ Checker takes integers as arguments. On execution, checker will wait for instruc
 
 The optional -v flag enables debug mode, which prints both stacks after each operation.
 
-How to use
+# How to use
 
 ./checker [-v] [args ...]
 
-Grade
+# Grade
 125/100

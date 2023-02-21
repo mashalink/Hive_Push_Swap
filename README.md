@@ -1,4 +1,4 @@
-Push_swap
+#Push_swap
 
 The Push_swap project is a very simple and highly effective algorithm project: data will need to be sorted You have at your disposal a set of int values, 2 stacks and a set of instructions to manipulate both stacks.
 
@@ -58,7 +58,7 @@ How to use
 
 ./push_swap [args ...]
 
-Checker
+#Checker
 
 Checker takes integers as arguments. On execution, checker will wait for instructions on the standard input. When reading is stopped, checker will print "OK" if the instructions result in a sorted array, and "KO" if not.
 
